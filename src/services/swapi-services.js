@@ -78,15 +78,14 @@ export default class SwapiService {
       eyeColor: person.eye_color,
     }
   }
-
 }
 
-const swapi = new SwapiService();
-swapi.getPlanets(8).then(body => {
-  console.log(body.name);
+// const swapi = new SwapiService();
+// swapi.getPlanets(8).then(body => {
+  // console.log(body.name);
 
   //each names
   // body.forEach((v) => {
   //   console.log(v.name);
   // });
-});
+// });
