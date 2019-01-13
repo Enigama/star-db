@@ -7,17 +7,21 @@ import Spinner from "../spinner/spinner";
 import ErrorIndicator from '../error-indicator/error-indicator'
 
 export default class RandomPlanet extends Component {
-  constructor() {
-    super()
-    this.updatePlanet();
-  }
-
   SwapiService = new SwapiService();
 
   state = {
     planet: {},
     loading: true,
     error: false
+  };
+
+  componentDidMount() {
+    this.updatePlanet();
+    this.interval = setInterval(() => this.updatePlanet(), 10000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   onPlanetLoaded = planet => {
@@ -27,19 +31,19 @@ export default class RandomPlanet extends Component {
     })
   }
 
-  onError = error => {
+  onError = () => {
     this.setState({
       error: true,
       loading: false
     });
-  }
+  };
 
-  updatePlanet() {
-    const id = 14;
+  updatePlanet = () => {
+    const id = Math.floor((Math.random()*25) + 3);
     this.SwapiService.getPlanets(id)
       .then(this.onPlanetLoaded)
       .catch(this.onError)
-  }
+  };
 
   render() {
     const { planet, loading, error } = this.state;
@@ -86,4 +90,4 @@ const PlanetView = ({planet}) => {
       </div>
     </React.Fragment>
   )
-}
+};
