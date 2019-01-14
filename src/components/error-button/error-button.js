@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import './error-button.css'
 
 export default class ErrorButton extends Component{
   state = {
@@ -12,7 +13,7 @@ export default class ErrorButton extends Component{
     }
     return(
       <button
-        className='btn btn-denger btn-lg'
+        className='btn-error btn btn-denger btn-lg'
         onClick={() => this.setState({renderError: true})}
       >Throw Error</button>
     )

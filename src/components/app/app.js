@@ -7,8 +7,13 @@ import PeoplePage from '../people-page';
 import './app.css';
 import ErrorIndicator from "../error-indicator/error-indicator";
 import ErrorButton from "../error-button/error-button";
+import ItemList from "../item-list";
+import PersonDetails from "../person-details";
+import SwapiService from "../../services/swapi-services";
 
 class App extends React.Component{
+  swapiService = new SwapiService();
+
   state = {
     showRandomPlanet: true,
     hasError: false,
@@ -46,8 +51,33 @@ class App extends React.Component{
         </button>
         <ErrorButton/>
         <PeoplePage />
-        <PeoplePage />
-        <PeoplePage />
+
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList
+              onItemSelected={this.onPersonSelected}
+              getData={this.swapiService.getAllPlanets}
+              renderItem={({name, diameter}) => `${name} (${diameter})`}
+            />
+          </div>
+          <div className="col-md-6">
+            <PersonDetails personId={this.selectedPerson}/>
+          </div>
+        </div>
+
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList
+              onItemSelected={this.onPersonSelected}
+              getData={this.swapiService.getAllStarships}
+              renderItem={({name, model}) => `${name} (${model})`}
+            />
+          </div>
+          <div className="col-md-6">
+            <PersonDetails personId={this.selectedPerson}/>
+          </div>
+        </div>
+
       </div>
     );
   }
