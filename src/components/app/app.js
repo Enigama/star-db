@@ -8,8 +8,9 @@ import './app.css';
 import ErrorIndicator from "../error-indicator/error-indicator";
 import ErrorButton from "../error-button/error-button";
 import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-services";
+import Row from "../row";
 
 class App extends React.Component{
   swapiService = new SwapiService();
@@ -37,47 +38,41 @@ class App extends React.Component{
     }
 
     const { showRandomPlanet } = this.state;
+    const { getPerson, getStarships, getPersonImage, getStarshipsImage} = this.swapiService;
+
     const planet = showRandomPlanet ? <RandomPlanet/> : null;
+
+    const personDetails = (
+      <ItemDetails
+        itemId={11}
+        getData={getPerson}
+        getImageUrl={getPersonImage}
+      />
+    );
+    const starshipDetails = (
+      <ItemDetails
+        itemId={9}
+        getData={getStarships}
+        getImageUrl={getStarshipsImage}
+      />
+    )
 
     return (
       <div>
         <Header />
-        { planet }
-        <button
-          className="toggle-planet btn btn-warning btn-lg"
-          onClick={this.toggleRandomPlanet}
-        >
-          Toggle Random Planet
-        </button>
-        <ErrorButton/>
-        <PeoplePage />
-
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList
-              onItemSelected={this.onPersonSelected}
-              getData={this.swapiService.getAllPlanets}
-              renderItem={({name, diameter}) => `${name} (${diameter})`}
-            />
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={this.selectedPerson}/>
-          </div>
-        </div>
-
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList
-              onItemSelected={this.onPersonSelected}
-              getData={this.swapiService.getAllStarships}
-              renderItem={({name, model}) => `${name} (${model})`}
-            />
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={this.selectedPerson}/>
-          </div>
-        </div>
-
+        {/*{ planet }*/}
+        {/*<button*/}
+          {/*className="toggle-planet btn btn-warning btn-lg"*/}
+          {/*onClick={this.toggleRandomPlanet}*/}
+        {/*>*/}
+          {/*Toggle Random Planet*/}
+        {/*</button>*/}
+        {/*<ErrorButton/>*/}
+        {/*<PeoplePage />*/}
+        <Row
+          left={personDetails}
+          right={starshipDetails}
+        />
       </div>
     );
   }
