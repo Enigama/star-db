@@ -28,7 +28,7 @@ const PlanetsDetails = ({ itemId }) => {
   return(
     <ItemDetails
       itemId={itemId}
-      getData={getPlanet}
+      getData={getPlanets}
       getImageUrl={getPlanetImage}
     >
       <Record field="population" label="Population" />
@@ -53,6 +53,6 @@ const StarshipsDetails = ({ itemId }) => {
 
 export {
   PersonDetails,
-  PlanetDetails,
+  PlanetsDetails,
   StarshipsDetails
 }

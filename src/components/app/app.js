@@ -14,7 +14,7 @@ import Row from "../row";
 
 import {
   PersonList,
-  PlanetList,
+  PlanetsList,
   StarshipsList,
   PersonDetails,
   PlanetsDetails,
@@ -87,9 +87,9 @@ class App extends React.Component{
             { ({name}) => <span>{name}</span>}
           </PersonList>
 
-          <PlanetList>
+          <PlanetsList>
             { ({name}) => <span>{name}</span>}
-          </PlanetList>
+          </PlanetsList>
 
           <StarshipsList>
             { ({name}) => <span>{name}</span>}
