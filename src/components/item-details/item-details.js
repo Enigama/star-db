@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 
+import ErrorButton from '../error-button/error-button';
+
 import './item-details.css';
-import SwapiService from "../../services/swapi-services";
-import Spinner from "../spinner/spinner";
-import ErrorButton from "../error-button/error-button";
+
+const Record = ({ item, field, label }) => {
+  return (
+    <li className="list-group-item">
+      <span className="term">{label}</span>
+      <span>{ item[field] }</span>
+    </li>
+  );
+};
+
+export {
+  Record
+};
+
 
 export default class ItemDetails extends Component {
-  swapiService = new SwapiService();
 
   state = {
     item: null,
-    loading: true,
-    hasError: false,
     image: null
   };
 
@@ -32,62 +42,41 @@ export default class ItemDetails extends Component {
     }
 
     getData(itemId)
-     .then( item => {
-       this.setState({
-         item,
-         loading: false,
-         image: getImageUrl(item)
-       });
-     })
-
+      .then((item) => {
+        this.setState({
+          item,
+          image: getImageUrl(item)
+        });
+      });
   }
 
   render() {
-    const { item, loading, image } = this.state;
 
-    if (loading) {
-      return  <Spinner/>
-    }
-
+    const { item, image } = this.state;
     if (!item) {
-      return <span>Select a person from a list</span>;
+      return <span>Select a item from a list</span>;
     }
-    const content = <PersonView item={item} image={image}/>;
+
+    const { name } = item;
 
     return (
-      <div className="person-details card">
-        {content}
+      <div className="item-details card">
+        <img className="item-image"
+             src={image}
+             alt="item"/>
+
+        <div className="card-body">
+          <h4>{name}</h4>
+          <ul className="list-group list-group-flush">
+            {
+              React.Children.map(this.props.children, (child) => {
+                return React.cloneElement(child, { item });
+              })
+            }
+          </ul>
+          <ErrorButton />
+        </div>
       </div>
-    )
+    );
   }
 }
-
-const PersonView = ({ item, image },) => {
-  const { name, gender, birthYear, eyeColor} = item;
-  console.log(image, 'test');
-  return(
-    <React.Fragment>
-      <img className="person-image"
-           src={image} alt='person-image'/>
-
-      <div className="card-body">
-        <h4>{name}</h4>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <span className="term">Gender</span>
-            <span>{gender}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Birth Year</span>
-            <span>{birthYear}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Eye Color</span>
-            <span>{eyeColor}</span>
-          </li>
-        </ul>
-        <ErrorButton/>
-      </div>
-    </React.Fragment>
-  )
-};
