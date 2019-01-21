@@ -5,7 +5,7 @@ import SwapiService from '../../services/swapi-services';
 const swapiService = new SwapiService();
 const {
   getPerson,
-  getPlanet,
+  getPlanets,
   getStarships,
   getPersonImage,
   getPlanetImage,
@@ -24,7 +24,19 @@ const PersonDetails = ({ itemId }) => {
     </ItemDetails>
   )
 };
-const PlanetDetails = () => {};
+const PlanetsDetails = ({ itemId }) => {
+  return(
+    <ItemDetails
+      itemId={itemId}
+      getData={getPlanet}
+      getImageUrl={getPlanetImage}
+    >
+      <Record field="population" label="Population" />
+      <Record field="length" label="Length" />
+      <Record field="costInCredits" label="Cost" />
+    </ItemDetails>
+  )
+};
 const StarshipsDetails = ({ itemId }) => {
   return (
     <ItemDetails

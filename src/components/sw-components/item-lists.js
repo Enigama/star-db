@@ -11,11 +11,11 @@ const {
 } = swapiService;
 
 const PersonList = witchData(ItemList, getAllPeople);
-const PlanetList = witchData(ItemList, getAllPlanets);
+const PlanetsList = witchData(ItemList, getAllPlanets);
 const StarshipsList = witchData(ItemList, getAllStarships);
 
 export {
   PersonList,
-  PlanetList,
+  PlanetsList,
   StarshipsList
 }

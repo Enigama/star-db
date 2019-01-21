@@ -1,20 +1,20 @@
 import {
   PersonList,
-  PlanetList,
+  PlanetsList,
   StarshipsList,
 } from './item-lists'
 
 import {
   PersonDetails,
-  PlanetDetails,
+  PlanetsDetails,
   StarshipsDetails,
 } from './details'
 
 export {
   PersonList,
-  PlanetList,
+  PlanetsList,
   StarshipsList,
   PersonDetails,
-  PlanetDetails,
+  PlanetsDetails,
   StarshipsDetails,
 }
