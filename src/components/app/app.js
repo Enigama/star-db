@@ -12,6 +12,16 @@ import ItemDetails, { Record } from "../item-details/item-details";
 import SwapiService from "../../services/swapi-services";
 import Row from "../row";
 
+import {
+  PersonList,
+  PlanetList,
+  StarshipsList,
+  PersonDetails,
+  PlanetDetails,
+  StarshipsDetails,
+} from '../sw-components';
+import ErrorBoundry from "../error-boundry";
+
 class App extends React.Component{
   swapiService = new SwapiService();
 
@@ -52,35 +62,38 @@ class App extends React.Component{
         <Record field="eyeColor" label="Eye Color" />
       </ItemDetails>
     );
-    const starshipDetails = (
-      <ItemDetails
-        itemId={9}
-        getData={getStarships}
-        getImageUrl={getStarshipsImage}
-      >
-        <Record field="model" label="Model" />
-        <Record field="length" label="Length" />
-        <Record field="costInCredits" label="Cost" />
-      </ItemDetails>
-    )
 
     return (
-      <div>
-        <Header />
-        { planet }
-        <button
-          className="toggle-planet btn btn-warning btn-lg"
-          onClick={this.toggleRandomPlanet}
-        >
-          Toggle Random Planet
-        </button>
-        <ErrorButton/>
-        {/*<PeoplePage />*/}
-        <Row
-          left={personDetails}
-          right={starshipDetails}
-        />
-      </div>
+      <ErrorBoundry>
+        <div className="stardb-app">
+          <Header />
+          { planet }
+          <button
+            className="toggle-planet btn btn-warning btn-lg"
+            onClick={this.toggleRandomPlanet}
+          >
+            Toggle Random Planet
+          </button>
+          <ErrorButton />
+
+          <PersonDetails itemId={11}/>
+
+          <StarshipsDetails itemId={9}/>
+
+          <PersonList>
+            { ({name}) => <span>{name}</span>}
+          </PersonList>
+
+          <PlanetList>
+            { ({name}) => <span>{name}</span>}
+          </PlanetList>
+
+          <StarshipsList>
+            { ({name}) => <span>{name}</span>}
+          </StarshipsList>
+
+        </div>
+      </ErrorBoundry>
     );
   }
 }
