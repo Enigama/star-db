@@ -77,24 +77,12 @@ class App extends React.Component{
           <ErrorButton />
 
           <PersonDetails itemId={11}/>
-
           <PlanetsDetails itemId={5}/>
-
           <StarshipsDetails itemId={9}/>
 
-
-          <PersonList>
-            { ({name}) => <span>{name}</span>}
-          </PersonList>
-
-          <PlanetsList>
-            { ({name}) => <span>{name}</span>}
-          </PlanetsList>
-
-          <StarshipsList>
-            { ({name}) => <span>{name}</span>}
-          </StarshipsList>
-
+          <PersonList />
+          <PlanetsList />
+          <StarshipsList />
         </div>
       </ErrorBoundry>
     );
