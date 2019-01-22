@@ -12,6 +12,8 @@ import ItemDetails, { Record } from "../item-details/item-details";
 import SwapiService from "../../services/swapi-services";
 import Row from "../row";
 
+import { SwapiServiceProvider} from "../swapi-service-context";
+
 import {
   PersonList,
   PlanetsList,
@@ -65,25 +67,27 @@ class App extends React.Component{
 
     return (
       <ErrorBoundry>
-        <div className="stardb-app">
-          <Header />
-          { planet }
-          <button
-            className="toggle-planet btn btn-warning btn-lg"
-            onClick={this.toggleRandomPlanet}
-          >
-            Toggle Random Planet
-          </button>
-          <ErrorButton />
+        <SwapiServiceProvider value={this.swapiService}>
+          <div className="stardb-app">
+            <Header />
+            { planet }
+            <button
+              className="toggle-planet btn btn-warning btn-lg"
+              onClick={this.toggleRandomPlanet}
+            >
+              Toggle Random Planet
+            </button>
+            <ErrorButton />
 
-          <PersonDetails itemId={11}/>
-          <PlanetsDetails itemId={5}/>
-          <StarshipsDetails itemId={9}/>
+            <PersonDetails itemId={11}/>
+            <PlanetsDetails itemId={5}/>
+            <StarshipsDetails itemId={9}/>
 
-          <PersonList />
-          <PlanetsList />
-          <StarshipsList />
-        </div>
+            <PersonList />
+            <PlanetsList />
+            <StarshipsList />
+          </div>
+        </SwapiServiceProvider>
       </ErrorBoundry>
     );
   }
