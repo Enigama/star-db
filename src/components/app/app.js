@@ -50,20 +50,8 @@ class App extends React.Component{
     }
 
     const { showRandomPlanet } = this.state;
-    const { getPerson, getStarships, getPersonImage, getStarshipsImage} = this.swapiService;
-
     const planet = showRandomPlanet ? <RandomPlanet/> : null;
 
-    const personDetails = (
-      <ItemDetails
-        itemId={11}
-        getData={getPerson}
-        getImageUrl={getPersonImage}
-      >
-        <Record field="gender" label="Gender" />
-        <Record field="eyeColor" label="Eye Color" />
-      </ItemDetails>
-    );
 
     return (
       <ErrorBoundry>
