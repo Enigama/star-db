@@ -5,9 +5,7 @@ import { witchSwapiService } from '../hoc-helper';
 
 const PlanetsDetails = ( props ) => {
   return(
-    <ItemDetails
-      { ...props }
-    >
+    <ItemDetails { ...props }>
       <Record field="population" label="Population" />
       <Record field="rotationPeriod" label="Rotation Period" />
       <Record field="diameter" label="Diameter" />

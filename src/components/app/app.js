@@ -18,18 +18,30 @@ import {
 } from '../sw-components';
 
 import './app.css';
+import DummySwapiService from "../swapi-service-context/dummy-swapi-service";
 
 class App extends React.Component{
-  swapiService = new SwapiService();
-
   state = {
     showRandomPlanet: true,
     hasError: false,
+    swapiService: new SwapiService()
   };
 
   componentDidCatch() {
     this.setState({ hasError: true})
   }
+
+  onServiceChange = () => {
+    console.log('click');
+    this.setState(({swapiService}) => {
+      const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
+
+      console.log(Service.name, 'switched');
+      return {
+        swapiService: new Service()
+      }
+    })
+  };
 
   toggleRandomPlanet = () => {
     this.setState((state) => {
@@ -47,12 +59,11 @@ class App extends React.Component{
     const { showRandomPlanet } = this.state;
     const planet = showRandomPlanet ? <RandomPlanet/> : null;
 
-
     return (
       <ErrorBoundry>
-        <SwapiServiceProvider value={this.swapiService}>
+        <SwapiServiceProvider value={this.state.swapiService}>
           <div className="stardb-app">
-            <Header />
+            <Header onServiceChange={this.onServiceChange}/>
             { planet }
             <button
               className="toggle-planet btn btn-warning btn-lg"
