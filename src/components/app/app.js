@@ -6,6 +6,8 @@ import ErrorButton from "../error-button/error-button";
 import ErrorBoundry from "../error-boundry";
 
 import SwapiService from "../../services/swapi-services";
+import DummySwapiService from "../../services/dummy-swapi-service";
+
 
 import { SwapiServiceProvider} from "../swapi-service-context";
 import {
@@ -18,7 +20,6 @@ import {
 } from '../sw-components';
 
 import './app.css';
-import DummySwapiService from "../swapi-service-context/dummy-swapi-service";
 
 class App extends React.Component{
   state = {
@@ -63,7 +64,9 @@ class App extends React.Component{
       <ErrorBoundry>
         <SwapiServiceProvider value={this.state.swapiService}>
           <div className="stardb-app">
-            <Header onServiceChange={this.onServiceChange}/>
+            <ErrorBoundry>
+              <Header onServiceChange={this.onServiceChange}/>
+            </ErrorBoundry>
             { planet }
             <button
               className="toggle-planet btn btn-warning btn-lg"
@@ -72,14 +75,17 @@ class App extends React.Component{
               Toggle Random Planet
             </button>
             <ErrorButton />
+            <ErrorBoundry>
+              <PersonDetails itemId={11}/>
+              <PlanetsDetails itemId={5}/>
+              <StarshipsDetails itemId={9}/>
+            </ErrorBoundry>
 
-            <PersonDetails itemId={11}/>
-            <PlanetsDetails itemId={5}/>
-            <StarshipsDetails itemId={9}/>
-
-            <PersonList />
-            <PlanetsList />
-            <StarshipsList />
+            <ErrorBoundry>
+              <PersonList />
+              <PlanetsList />
+              <StarshipsList />
+            </ErrorBoundry>
           </div>
         </SwapiServiceProvider>
       </ErrorBoundry>
