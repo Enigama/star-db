@@ -3,7 +3,6 @@ import React from 'react';
 import './item-list.css';
 
 const ItemList = (props) => {
-
   const { data, onItemSelected, children: renderlabel } = props;
 
   const items = data.map( item => {
@@ -13,7 +12,7 @@ const ItemList = (props) => {
     return(
       <li className="list-group-item"
           key={id}
-          onClick={() => onItemSelected(id, this.state.loading)}
+          onClick={() => onItemSelected(id)}
       >
         { label }
       </li>
