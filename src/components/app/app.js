@@ -40,7 +40,7 @@ class App extends React.Component{
     }
 
     const { showRandomPlanet } = this.state;
-    const planet = showRandomPlanet ? <RandomPlanet updateInterval={5000}/> : null;
+    const planet = showRandomPlanet ? <RandomPlanet /> : null;
 
     return (
       <ErrorBoundry>
