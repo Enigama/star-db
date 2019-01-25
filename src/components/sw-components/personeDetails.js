@@ -18,4 +18,4 @@ const  mapMethodsToProps = (swapiService) => {
   }
 }
 
-export default witchSwapiService(PersonDetails, mapMethodsToProps);
+export default witchSwapiService(mapMethodsToProps)(PersonDetails);

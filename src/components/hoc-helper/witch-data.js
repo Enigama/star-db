@@ -5,8 +5,6 @@ const  withData = (View) => {
   return class extends Component {
     state = {
       data: null,
-      loading: false,
-      error: false
     };
 
     componentDidMount() {
@@ -23,27 +21,16 @@ const  withData = (View) => {
       this.props.getData()
         .then( data => {
           this.setState({
-            data: data,
-            loading: true,
-            error: false
-          })
-        })
-        .catch( reject => {
-          this.setState({
-            loading: false,
-            error: true
+            data,
           })
         })
     }
 
     render() {
-      const { data, loading, error } = this.state;
-      if (loading) {
-        return <Spinner/>
-      }
+      const { data } = this.state;
 
-      if (error) {
-        return;
+      if (!data) {
+        return <Spinner/>
       }
 
       return <View {...this.props} data={data}/>
