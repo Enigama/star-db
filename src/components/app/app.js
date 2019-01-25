@@ -13,6 +13,8 @@ import { SwapiServiceProvider} from "../swapi-service-context";
 
 import './app.css';
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 class App extends React.Component{
   state = {
     showRandomPlanet: true,
@@ -39,30 +41,18 @@ class App extends React.Component{
       return <ErrorIndicator/>
     }
 
-    const { showRandomPlanet } = this.state;
-    const planet = showRandomPlanet ? <RandomPlanet /> : null;
-
     return (
       <ErrorBoundry>
         <SwapiServiceProvider value={this.state.swapiService}>
-          <div className="stardb-app">
-            <ErrorBoundry>
+          <Router>
+            <div className="stardb-app">
               <Header onServiceChange={this.onServiceChange}/>
-            </ErrorBoundry>
-            { planet }
-            <ErrorBoundry>
-              <PeoplePage/>
-              {/*<Row left={<PersonList />} right={<PersonDetails itemId={11}/>}/>*/}
-            </ErrorBoundry>
-            <ErrorBoundry>
-              <PlanetsPage />
-              {/*<Row left={<PlanetsList />} right={<PlanetsDetails itemId={5}/> }/>*/}
-            </ErrorBoundry>
-            <ErrorBoundry>
-              <StarshipsPage />
-              {/*<Row left={<StarshipsList />} right={<StarshipsDetails itemId={9}/>}/>*/}
-            </ErrorBoundry>
-          </div>
+              <RandomPlanet/>
+              <Route path="/people" component={PeoplePage}/>
+              <Route path="/planets" component={PlanetsPage}/>
+              <Route path="/starships" component={StarshipsPage}/>
+            </div>
+          </Router>
         </SwapiServiceProvider>
       </ErrorBoundry>
     );
