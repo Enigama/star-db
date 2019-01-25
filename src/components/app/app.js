@@ -48,9 +48,35 @@ class App extends React.Component{
             <div className="stardb-app">
               <Header onServiceChange={this.onServiceChange}/>
               <RandomPlanet/>
-              <Route path="/people" component={PeoplePage}/>
-              <Route path="/planets" component={PlanetsPage}/>
-              <Route path="/starships" component={StarshipsPage}/>
+              <Route
+                path="/"
+                render={() => <h2>Welcome to StarDB</h2>}
+                exact
+              />
+              <Route
+                path="/people"
+                render={() => <h2>People</h2>}
+              />
+              <Route
+                path="/people"
+                component={PeoplePage}
+              />
+              <Route
+                path="/planets"
+                render={() => <h2>Planets</h2>}
+              />
+              <Route
+                path="/planets"
+                component={PlanetsPage
+                }/>
+              <Route
+                path="/starships"
+                render={() => <h2>Starships</h2>}
+              />
+              <Route
+                path="/starships"
+                component={StarshipsPage}
+              />
             </div>
           </Router>
         </SwapiServiceProvider>
